@@ -1,4 +1,4 @@
-# Aproplan module refactor
+# Aproplan typescript module refactor
 Simple python script which purpose is:
 
  - To remove module keyword from each files within a specific folder
