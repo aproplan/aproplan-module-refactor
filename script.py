@@ -31,35 +31,23 @@ def use_imports(fname, path_name, tsconfig_name, tsconfig_alias):
     with open(fname,"r+") as f:
         d = f.readlines()
         f.seek(0)
+		lines = []
         for i in d:
             if(i.find(path_name) > 0 and i.find(path_name+tsconfig_alias) > 0):
-                need_to_add_import = True;            
-                f.write(i.replace(path_name, ""))
+                need_to_add_import = True;
+                lines.append(i.replace(path_name, ""))
             else:
-                f.write(i)
+                lines.append(i)
         
         if(need_to_add_import):
-            f.seek(0, 0)
-            content = f.read()
-            f.seek(0, 0)
-            f.write('import { ' + tsconfig_alias + ' } from "@' + tsconfig_name + '/' + tsconfig_alias + '";' + '\n\n' + content)
+            f.seek(0)
+            val = 'import { ' + tsconfig_alias + ' } from "@' + tsconfig_name + '/' + tsconfig_alias + '";' + '\r\n'
+            lines.insert(0, val)
+            f.writelines(lines);
             f.truncate()
 
 print("Starting lines deletion...");
 print()
-# print("file length: " + str(file_len("file-to-read.ts")))
-# print()
-# file_length = file_len("file-to-read.ts")
-# print()
-# read_first_last_lines("file-to-read.ts")
-# print()
-# delete_first_last_lines("file-to-read.ts", file_length)
-# print()
-# read_first_last_lines("file-to-read.ts")
-# print()
-# print("END")
-# print()
-# print("Starting rename...");
 
 path = "components/treeList/";
 for filename in os.listdir(path):
