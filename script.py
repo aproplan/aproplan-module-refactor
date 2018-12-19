@@ -32,7 +32,7 @@ def use_imports(fname, path_name, tsconfig_name, tsconfig_alias):
         d = f.readlines()
         f.seek(0)
         for i in d:
-            if(i.find(path_name) > 0 and i.find(path_name+tsconfig_name) > 0):
+            if(i.find(path_name) > 0 and i.find(path_name+tsconfig_alias) > 0):
                 need_to_add_import = True;            
                 f.write(i.replace(path_name, ""))
             else:
@@ -42,7 +42,7 @@ def use_imports(fname, path_name, tsconfig_name, tsconfig_alias):
             f.seek(0, 0)
             content = f.read()
             f.seek(0, 0)
-            f.write('import { ' + tsconfig_name + ' } from "@' + tsconfig_alias + '/' + tsconfig_name + '";' + '\n\n' + content)
+            f.write('import { ' + tsconfig_alias + ' } from "@' + tsconfig_name + '/' + tsconfig_alias + '";' + '\n\n' + content)
             f.truncate()
 
 print("Starting lines deletion...");
